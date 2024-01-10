@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.voidhash.android_3d_rendering"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.voidhash.android_3d_rendering"
         minSdk = 30
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -41,6 +41,11 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    implementation("com.google.android.filament:filament-android:1.49.2")
+    implementation("com.google.android.filament:gltfio-android:1.49.2")
+    implementation("com.google.android.filament:filament-utils-android:1.49.2")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
