@@ -133,7 +133,7 @@ private fun loadEnvironment(ibl: String) {
 ```
 7. Run in a physical device (emulator is not able to run Filament application)
 
-![rendering](https://github.com/VoidHash/android-3d-rendering/assets/8929413/b7df0ee8-ff73-477a-8788-afa867eb6ae7)
+![rendering](https://github.com/VoidHash/android-3d-rendering/assets/8929413/416e13d6-82a8-49c2-865f-3064cd4075be)
 
 You can pinch the model with your fingers to manipulate them. For more feature and details download this repository and check the projeto using Android Studio
 
