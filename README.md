@@ -86,13 +86,10 @@ override fun onDestroy() {
 // ...
 ```
 
-4. Create a basic Skybox and load your GLTF model
+4. Load your GLTF model
 ```kotlin
 override fun onCreate(savedInstanceState: Bundle?) {
    // ...
-
-   //Create a default Skybox
-   modelViewer.scene.skybox = Skybox.Builder().build(modelViewer.engine)
    loadGlb("DamagedHelmet")
 }
 
@@ -110,7 +107,38 @@ private fun readAsset(assetName: String): ByteBuffer {
    return ByteBuffer.wrap(bytes)
 }
 ```
+5. Load your environment and indirect light
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+   // ...
 
-5. Run in a physical device (emulator is not able to run Filament application)
+   loadGlb("DamagedHelmet")
+   loadEnvironment("default_env")
+}
 
+private fun loadEnvironment(ibl: String) {
+    // Create the indirect light source and add it to the scene.
+    val bufferLight = readAsset("${ibl}_ibl.ktx")
+    KTX1Loader.createIndirectLight(modelViewer.engine, bufferLight).apply {
+        intensity = 50_000f
+        modelViewer.scene.indirectLight = this
+    }
 
+    // Create the sky box and add it to the scene.
+    val bufferSkybox = readAsset("${ibl}_skybox.ktx")
+    KTX1Loader.createSkybox(modelViewer.engine, bufferSkybox).apply {
+        modelViewer.scene.skybox = this
+    }
+}
+```
+7. Run in a physical device (emulator is not able to run Filament application)
+
+![rendering](https://github.com/VoidHash/android-3d-rendering/assets/8929413/b7df0ee8-ff73-477a-8788-afa867eb6ae7)
+
+You can pinch the model with your fingers to manipulate them. For more feature and details download this repository and check the projeto using Android Studio
+
+---
+
+### License 
+
+This project is licensed under [MIT License](https://github.com/VoidHash/hearthstone-codex/blob/master/LICENSE).
