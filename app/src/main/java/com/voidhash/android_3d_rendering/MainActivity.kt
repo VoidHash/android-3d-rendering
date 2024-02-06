@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity(), Choreographer.FrameCallback {
 
     private val animationSpeed = 10f
 
+    private val isSpin = false
+
     //This loads in the native code for the filament-utils layer.
     companion object {
         init {
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity(), Choreographer.FrameCallback {
         surfaceView.setOnTouchListener(modelViewer)
 
         loadGlb("models/DamagedHelmet/glTF-Binary/DamagedHelmet")
-        loadEnvironment("skybox/venetian_crossroads_2k/venetian_crossroads_2k")
+        loadEnvironment("skybox/default_env/default_env")
 
         //Create a default Skybox
         //modelViewer.scene.skybox = Skybox.Builder().build(modelViewer.engine)
@@ -68,14 +70,16 @@ class MainActivity : AppCompatActivity(), Choreographer.FrameCallback {
             updateBoneMatrices()
         }
 
-        // Reset the root transform, then rotate it around the Z axis.
-        modelViewer.asset?.apply {
-            //Transform the root node of the scene such that it fits into a 1x1x1 cube centered at the origin.
-            modelViewer.transformToUnitCube()
-            val rootTransform = this.root.getTransform()
-            val degrees = animationSpeed * seconds.toFloat()
-            val zAxis = Float3(0f, 0f, 1f)
-            this.root.setTransform(rootTransform * rotation(zAxis, degrees))
+        if(isSpin) {
+            // Reset the root transform, then rotate it around the Z axis.
+            modelViewer.asset?.apply {
+                //Transform the root node of the scene such that it fits into a 1x1x1 cube centered at the origin.
+                modelViewer.transformToUnitCube()
+                val rootTransform = this.root.getTransform()
+                val degrees = animationSpeed * seconds.toFloat()
+                val zAxis = Float3(0f, 0f, 1f)
+                //this.root.setTransform(rootTransform * rotation(zAxis, degrees))
+            }
         }
 
         modelViewer.render(frameTimeNanos)
